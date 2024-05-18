@@ -178,7 +178,9 @@ class LocalItems extends RegistryItems<LocalDevice, LocalGENASubscription> {
             }
 
             if (isAdvertised(localDevice.getIdentity().getUdn()))
-         		advertiseByebye(localDevice, !shuttingDown);
+         		{
+         		    advertiseByebye(localDevice, !shuttingDown);
+         		}
 
             if (!shuttingDown) {
                 for (final RegistryListener listener : registry.getListeners()) {
