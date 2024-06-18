@@ -1,5 +1,6 @@
 package com.zxt.dlna.util;
 
+import io.github.pixee.security.ZipSecurity;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -414,7 +415,7 @@ public class FileHelper {
 	/*************ZIP file operation***************/
 	public static boolean readZipFile(String zipFileName, StringBuffer crc) {
 		try {
-			ZipInputStream zis = new ZipInputStream(new FileInputStream(zipFileName));
+			ZipInputStream zis = ZipSecurity.createHardenedInputStream(new FileInputStream(zipFileName));
 			ZipEntry entry;
 			while ((entry = zis.getNextEntry()) != null) {
 				long size = entry.getSize();
