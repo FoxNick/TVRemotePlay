@@ -1,5 +1,6 @@
 package com.zxt.dlna.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -89,7 +90,7 @@ public class DevMountInfo implements IDev {
 		cache.clear();
 		BufferedReader br = new BufferedReader(new FileReader(VOLD_FSTAB));
 		String tmp = null;
-		while ((tmp = br.readLine()) != null) {
+		while ((tmp = BoundedLineReader.readLine(br, 5_000_000)) != null) {
 			// the words startsWith "dev_mount" are the SD info
 			if (tmp.startsWith(HEAD)) {
 				cache.add(tmp);
