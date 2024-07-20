@@ -15,6 +15,8 @@
 
 package org.fourthline.cling.model.message.header;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -40,7 +42,7 @@ public class LocationHeader extends UpnpHeader<URL> {
 
     public void setString(String s) throws InvalidHeaderException {
         try {
-            URL url = new URL(s);
+            URL url = Urls.create(s, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             setValue(url);
         } catch (MalformedURLException ex) {
             throw new InvalidHeaderException("Invalid URI: " + ex.getMessage());

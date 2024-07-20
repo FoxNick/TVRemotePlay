@@ -15,6 +15,8 @@
 
 package org.fourthline.cling.binding.xml;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import static org.fourthline.cling.model.XMLUtil.appendNewElement;
 import static org.fourthline.cling.model.XMLUtil.appendNewElementIfNotNull;
 
@@ -154,7 +156,7 @@ public class UDA10DeviceDescriptorBinderImpl implements DeviceDescriptorBinder, 
                     String urlString = XMLUtil.getTextContent(rootChild);
                     if (urlString != null && urlString.length() > 0) {
                         // We hope it's  RFC 2396 and RFC 2732 compliant
-                        descriptor.baseURL = new URL(urlString);
+                        descriptor.baseURL = Urls.create(urlString, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                     }
                 } catch (Exception ex) {
                     throw new DescriptorBindingException("Invalid URLBase: " + ex.getMessage());

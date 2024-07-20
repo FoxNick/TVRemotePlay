@@ -15,6 +15,8 @@
 
 package org.fourthline.cling.binding.xml;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.fourthline.cling.binding.staging.MutableDevice;
 import org.fourthline.cling.binding.staging.MutableIcon;
 import org.fourthline.cling.binding.staging.MutableService;
@@ -113,7 +115,7 @@ public class UDA10DeviceDescriptorBinderSAXImpl extends UDA10DeviceDescriptorBin
                         String urlString = getCharacters();
                         if (urlString != null && urlString.length() > 0) {
                             // We hope it's  RFC 2396 and RFC 2732 compliant
-                            getInstance().baseURL = new URL(urlString);
+                            getInstance().baseURL = Urls.create(urlString, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                         }
                     } catch (Exception ex) {
                         throw new SAXException("Invalid URLBase: " + ex.toString());
