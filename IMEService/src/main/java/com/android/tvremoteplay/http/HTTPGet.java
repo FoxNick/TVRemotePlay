@@ -1,6 +1,8 @@
 package com.android.tvremoteplay.http;
 
 import android.util.Log;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import org.apache.http.util.CharArrayBuffer;
 
@@ -19,7 +21,7 @@ public class HTTPGet {
     public static String readString(String uri){
         HTTPSTrustManager.allowAllSSL();
         try {
-            URL url = new URL(uri);
+            URL url = Urls.create(uri, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "text/html, application/xhtml+xml, image/jxr, */*");
@@ -61,7 +63,7 @@ public class HTTPGet {
     public static boolean downloadFile(String uri, File file){
         HTTPSTrustManager.allowAllSSL();
         try {
-            URL url = new URL(uri);
+            URL url = Urls.create(uri, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "text/html, application/xhtml+xml, image/jxr, */*");
