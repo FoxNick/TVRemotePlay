@@ -158,7 +158,9 @@ public class AppPackagesHelper {
     }
 
     public static void uninstallPackage(final String packageName, final Context context){
-        if(getApplicationInfo(packageName, context) == null)return;;
+        if(getApplicationInfo(packageName, context) == null){
+            return;
+        };
         try {
             Intent intent = new Intent();
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -172,7 +174,9 @@ public class AppPackagesHelper {
     }
 
     public static void runPackage(final String packageName, final Context context){
-        if(getApplicationInfo(packageName, context) == null)return;;
+        if(getApplicationInfo(packageName, context) == null){
+            return;
+        };
         try {
             PackageManager pm = context.getPackageManager();
             Intent intent = pm.getLaunchIntentForPackage(packageName);
