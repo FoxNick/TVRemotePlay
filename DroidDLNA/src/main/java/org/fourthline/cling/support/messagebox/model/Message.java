@@ -15,6 +15,7 @@
 
 package org.fourthline.cling.support.messagebox.model;
 
+import java.security.SecureRandom;
 import org.fourthline.cling.support.messagebox.parser.MessageDOM;
 import org.fourthline.cling.support.messagebox.parser.MessageDOMParser;
 import org.fourthline.cling.support.messagebox.parser.MessageElement;
@@ -29,7 +30,7 @@ import java.util.Random;
  */
 public abstract class Message implements ElementAppender {
 
-    final protected Random randomGenerator = new Random();
+    final protected Random randomGenerator = new SecureRandom();
 
     public enum Category {
         SMS("SMS"),

@@ -15,6 +15,7 @@
 
 package org.fourthline.cling.protocol.async;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -66,7 +67,7 @@ public class ReceivingSearch extends ReceivingAsync<IncomingSearchRequest> {
 
     final private static Logger log = Logger.getLogger(ReceivingSearch.class.getName());
 
-    final protected Random randomGenerator = new Random();
+    final protected Random randomGenerator = new SecureRandom();
 
     public ReceivingSearch(UpnpService upnpService, IncomingDatagramMessage<UpnpRequest> inputMessage) {
         super(upnpService, new IncomingSearchRequest(inputMessage));

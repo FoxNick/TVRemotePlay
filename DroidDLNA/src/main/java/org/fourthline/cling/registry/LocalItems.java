@@ -15,6 +15,7 @@
 
 package org.fourthline.cling.registry;
 
+import java.security.SecureRandom;
 import org.fourthline.cling.model.DiscoveryOptions;
 import org.fourthline.cling.model.resource.Resource;
 import org.fourthline.cling.model.gena.CancelReason;
@@ -284,7 +285,7 @@ class LocalItems extends RegistryItems<LocalDevice, LocalGENASubscription> {
 
     /* ############################################################################################################ */
 
-    protected Random randomGenerator = new Random();
+    protected Random randomGenerator = new SecureRandom();
 
     protected void advertiseAlive(final LocalDevice localDevice) {
         registry.executeAsyncProtocol(new Runnable() {
