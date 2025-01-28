@@ -15,6 +15,8 @@
 
 package org.fourthline.cling.model.message.header;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -67,7 +69,7 @@ public class CallbackHeader extends UpnpHeader<List<URL>> {
                     continue;
                 }
 
-                URL url = new URL(sp);
+                URL url = Urls.create(sp, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                 try {
                     /*
                         On some platforms (Android...), a valid URL might not be a valid URI, so
