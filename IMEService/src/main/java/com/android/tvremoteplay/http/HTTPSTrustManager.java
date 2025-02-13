@@ -58,7 +58,7 @@ public class HTTPSTrustManager implements X509TrustManager {
         }
 
         try {
-            context = SSLContext.getInstance("TLSv1");
+            context = SSLContext.getInstance("TLSv1.2");
             context.init(null, trustManagers, new SecureRandom());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
