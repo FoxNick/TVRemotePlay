@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLDecoder;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class RemoteServerFileManager implements NanoHTTPD.TempFileManager {
         private boolean isTemp;
         public SDCardTempFile(String fileName) throws IOException {
             if(fileName == null || fileName.isEmpty()){
-                this.file = File.createTempFile("tmp-", "", tmpDataDir);
+                this.file = Files.createTempFile(tmpDataDir.toPath(), "tmp-", "").toFile();
                 isTemp = true;
             }else {
                 this.file = new File(filesDir, fileName);
